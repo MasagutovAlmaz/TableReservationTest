@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: TableReservationPostgres
+    image: postgres:16.1-alpine
+    env_file:
+      - .env
+    ports:
+      - "3114:5432"
+    volumes:
+      - ~TableReservation:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: tablereservation-api
+    ports:
+      - "2341:2341"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+volumes:
+  TableReservation:
