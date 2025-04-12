@@ -16,9 +16,7 @@ async def lifespan(app: FastAPI):
         await close_db()
 app = FastAPI(lifespan=lifespan)
 
-def main():
-    app.include_router(table_router)
-    app.include_router(reservation_router)
+app.include_router(table_router)
+app.include_router(reservation_router)
 
-main()
 
